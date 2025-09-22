@@ -44,12 +44,12 @@ jobs:
           npm run build
 
       # --------------------
-      # Copy frontend build to backend
+      # Copy frontend build into backend
       # --------------------
       - name: Copy frontend build to backend
         run: |
-          mkdir -p backend/frontend/build
-          cp -r frontend/build/* backend/frontend/build/
+          mkdir -p backend/app/frontend/build
+          cp -r frontend/build/* backend/app/frontend/build/
 
       # --------------------
       # Upload artifact for deploy
@@ -61,6 +61,7 @@ jobs:
           path: |
             backend
             !backend/venv/
+            !backend/__pycache__/
 
   deploy:
     runs-on: ubuntu-latest
@@ -85,8 +86,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'DocuGen'
+          app-name: 'DocuGen' # 🔥 replace if needed
           slot-name: 'Production'
-          package: backend   # ✅ not backend/.
+          package: ./backend
           startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
-
