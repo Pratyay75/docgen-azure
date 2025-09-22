@@ -89,4 +89,5 @@ jobs:
           app-name: 'DocuGen' # 🔥 replace if needed
           slot-name: 'Production'
           package: ./backend
-          startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
+          startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend.app.main:app'
+
