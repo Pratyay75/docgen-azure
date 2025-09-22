@@ -87,5 +87,5 @@ jobs:
         with:
           app-name: 'DocuGen' # 🔥 replace with your Web App name
           slot-name: 'Production'
-          package: backend
+          package: backend/.   # ✅ deploy contents of backend, not the folder
           startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
