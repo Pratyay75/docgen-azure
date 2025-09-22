@@ -1,28 +1,41 @@
-# Node
+# -----------------
+# Node / Frontend
+# -----------------
 frontend/node_modules/
 frontend/build/
 frontend/dist/
+backend/frontend/build/   # ✅ prevent committing built frontend inside backend
 
-# Python
+# -----------------
+# Python / Backend
+# -----------------
 __pycache__/
 backend/__pycache__/
 backend/uploads/
 *.pyc
 *.pyo
 *.pyd
+
+# -----------------
+# Environment files
+# -----------------
 .env
 .env.local
 venv/
 env/
 .venv/
 
+# -----------------
 # IDE / OS
+# -----------------
 .vscode/
 .idea/
 .DS_Store
 *.log
 
-# misc
+# -----------------
+# Misc
+# -----------------
 coverage/
 dist/
 *.zip
