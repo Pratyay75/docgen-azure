@@ -15,7 +15,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Delete, Edit, Save, Cancel } from "@mui/icons-material";
-import axios from "axios";
+import api from "../services/api"; // ✅ use central API service
 import Navbar from "../components/Navbar";
 import ErrorSnackbar from "../components/ErrorSnackbar";
 import "../styles/AdminPage.css";
@@ -59,7 +59,7 @@ function AdminPage() {
   // ======================
   const fetchCompanies = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/companies", {
+      const res = await api.get("/api/companies", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCompanies(res.data);
@@ -70,7 +70,7 @@ function AdminPage() {
 
   const handleSaveCompany = async (company) => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/companies", company, {
+      await api.post("/api/companies", company, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCompanies();
@@ -83,7 +83,7 @@ function AdminPage() {
 
   const handleUpdateCompany = async (company) => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/companies", company, {
+      await api.post("/api/companies", company, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCompanies();
@@ -96,7 +96,7 @@ function AdminPage() {
 
   const handleDeleteCompany = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/companies/${id}`, {
+      await api.delete(`/api/companies/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchCompanies();
@@ -112,7 +112,7 @@ function AdminPage() {
   // ======================
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/users", {
+      const res = await api.get("/api/users", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -123,7 +123,7 @@ function AdminPage() {
 
   const handleSaveUser = async (user) => {
     try {
-      await axios.post("http://127.0.0.1:8000/api/users/register", user, {
+      await api.post("/api/users/register", user, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -137,7 +137,7 @@ function AdminPage() {
 
   const handleUpdateUser = async (user) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/users/${user.id}`, user, {
+      await api.put(`/api/users/${user.id}`, user, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -150,7 +150,7 @@ function AdminPage() {
 
   const handleDeleteUser = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/users/${id}`, {
+      await api.delete(`/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchUsers();
@@ -182,6 +182,7 @@ function AdminPage() {
 
         {/* Content */}
         <Box flex={1} p={4}>
+          {/* Companies */}
           {tab === "company" && (
             <Paper className="table-container" elevation={3}>
               <Typography variant="h6" className="admin-title">Company Master</Typography>
@@ -243,6 +244,7 @@ function AdminPage() {
             </Paper>
           )}
 
+          {/* Users */}
           {tab === "user" && (
             <Paper className="table-container" elevation={3}>
               <Typography variant="h6" className="admin-title">User Master</Typography>

@@ -5,8 +5,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import AddIcon from "@mui/icons-material/Add";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api"; // ✅ use centralized API
 import Navbar from "../components/Navbar";
 import ErrorSnackbar from "../components/ErrorSnackbar";
 import "../styles/UploadPage.css";
@@ -28,7 +28,7 @@ export default function UploadPage() {
   const fetchDocs = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://127.0.0.1:8000/api/documents/my-documents", {
+      const res = await api.get("/api/documents/my-documents", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setDocuments(res.data?.documents || []);
@@ -47,7 +47,7 @@ export default function UploadPage() {
       const fd = new FormData();
       fd.append("file", file);
 
-      const res = await axios.post("http://127.0.0.1:8000/api/documents/upload", fd, {
+      const res = await api.post("/api/documents/upload", fd, {
         headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
       });
 
@@ -82,9 +82,10 @@ export default function UploadPage() {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const cfgRes = await axios.get("http://127.0.0.1:8000/api/config", {
-        headers: { Authorization: `Bearer ${token}` },
-      }).catch(() => null);
+      const cfgRes = await api
+        .get("/api/config", { headers: { Authorization: `Bearer ${token}` } })
+        .catch(() => null);
+
       const config = cfgRes?.data || null;
 
       const payload = {
@@ -94,7 +95,7 @@ export default function UploadPage() {
         sections: config?.sections || [],
       };
 
-      const res = await axios.post("http://127.0.0.1:8000/api/documents/generate", payload, {
+      const res = await api.post("/api/documents/generate", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -144,7 +145,7 @@ export default function UploadPage() {
     if (!selectedDoc) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://127.0.0.1:8000/api/documents/${selectedDoc.id}`, {
+      await api.delete(`/api/documents/${selectedDoc.id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchDocs();

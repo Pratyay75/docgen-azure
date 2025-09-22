@@ -1,7 +1,8 @@
+// src/pages/SignupPage.js
 import React, { useState } from "react";
 import { TextField, Button, Paper, Typography, Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api"; // ✅ use centralized API instance
 import ErrorSnackbar from "../components/ErrorSnackbar";
 import "../styles/SignupPage.css";
 
@@ -14,18 +15,22 @@ function SignupPage() {
 
   const navigate = useNavigate();
 
-  // --- Core signup logic (unchanged) ---
+  // --- Core signup logic ---
   const handleSignup = async () => {
     setLoading(true);
     setSnack({ open: false, message: "", severity: "error" });
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/users/signup", { name, email, password });
+      const res = await api.post("/api/users/signup", { name, email, password }); // ✅ no hardcoded URL
+
+      // Save user and token in localStorage
       localStorage.setItem("user", JSON.stringify(res.data.user));
       localStorage.setItem("token", res.data.token);
+
       setSnack({ open: true, message: "Account created", severity: "success" });
+
       setTimeout(() => navigate("/upload"), 600);
     } catch (err) {
-      const msg = err.response?.data?.detail || "Signup failed";
+      const msg = err.friendlyMessage || err.response?.data?.detail || "Signup failed";
       setSnack({ open: true, message: msg, severity: "error" });
     } finally {
       setLoading(false);

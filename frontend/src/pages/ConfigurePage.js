@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ErrorSnackbar from "../components/ErrorSnackbar";
-import axios from "axios";
+import api from "../services/api";
 import "../styles/ConfigurePage.css";
 
 export default function ConfigurePage() {
@@ -27,9 +27,9 @@ export default function ConfigurePage() {
     const fetchConfig = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://127.0.0.1:8000/api/config", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await api.get("/api/config", {
+   headers: { Authorization: `Bearer ${token}` },
+ });
 
         if (res.data) {
           setDocumentName(res.data.document_name || "");
@@ -189,9 +189,9 @@ export default function ConfigurePage() {
         })),
       };
 
-      const res = await axios.post("http://127.0.0.1:8000/api/config", payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await api.post("/api/config", payload, {
+   headers: { Authorization: `Bearer ${token}` },
+ });
 
       if (res.data) {
         const pagesData = (res.data.pages || []).map((p) => ({

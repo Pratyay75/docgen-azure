@@ -1,7 +1,8 @@
+// src/pages/LoginPage.js
 import React, { useState } from "react";
 import { TextField, Button, Paper, Typography, Box, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api"; // ✅ use centralized api.js
 import ErrorSnackbar from "../components/ErrorSnackbar";
 import "../styles/LoginPage.css";
 
@@ -17,16 +18,20 @@ function LoginPage() {
     setLoading(true);
     setSnack({ open: false, message: "", severity: "error" });
     try {
-      const res = await axios.post("http://127.0.0.1:8000/api/users/login", { email, password });
+      const res = await api.post("/api/users/login", { email, password }); // ✅ no hardcoded base URL
+
+      // Save user + token in localStorage
       localStorage.setItem("user", JSON.stringify(res.data.user));
       localStorage.setItem("token", res.data.token);
+
       setSnack({ open: true, message: "Login successful", severity: "success" });
+
       setTimeout(() => {
         if (res.data.user.role === "superadmin") navigate("/admin");
         else navigate("/upload");
       }, 600);
     } catch (err) {
-      const msg = err.response?.data?.detail || "Invalid credentials";
+      const msg = err.friendlyMessage || err.response?.data?.detail || "Invalid credentials";
       setSnack({ open: true, message: msg, severity: "error" });
     } finally {
       setLoading(false);
@@ -113,7 +118,12 @@ function LoginPage() {
         </Paper>
       </div>
 
-      <ErrorSnackbar open={snack.open} onClose={() => setSnack({ ...snack, open: false })} severity={snack.severity} message={snack.message} />
+      <ErrorSnackbar
+        open={snack.open}
+        onClose={() => setSnack({ ...snack, open: false })}
+        severity={snack.severity}
+        message={snack.message}
+      />
     </Box>
   );
 }
