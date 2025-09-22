@@ -1,0 +1,28 @@
+# Node
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# Python
+__pycache__/
+backend/__pycache__/
+backend/uploads/
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.local
+venv/
+env/
+.venv/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# misc
+coverage/
+dist/
+*.zip
