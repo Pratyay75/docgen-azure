@@ -39,7 +39,6 @@ app = FastAPI(
 # ---------------------------
 # CORS Middleware
 # ---------------------------
-# ⚠️ In production, set CORS_ALLOWED_ORIGINS to your frontend domain(s)
 allowed_origins = os.getenv("CORS_ALLOWED_ORIGINS", "*").split(",")
 
 app.add_middleware(
@@ -51,7 +50,7 @@ app.add_middleware(
 )
 
 # ---------------------------
-# Register routers
+# Register routers (API routes under /api/*)
 # ---------------------------
 app.include_router(users_router, prefix="/api/users", tags=["users"])
 app.include_router(templates_router, prefix="/api/templates", tags=["templates"])
@@ -63,20 +62,19 @@ app.include_router(config_router, prefix="/api/config", tags=["config"])
 # ---------------------------
 # Serve React frontend (built files)
 # ---------------------------
-FRONTEND_BUILD_DIR = os.path.join(os.path.dirname(__file__), "../../frontend/build")
+FRONTEND_BUILD_DIR = os.path.join(os.path.dirname(__file__), "frontend/build")
 
 if os.path.exists(FRONTEND_BUILD_DIR):
     logger.info(f"✅ Serving React frontend from {FRONTEND_BUILD_DIR}")
 
-    # Serve static assets (JS, CSS, images)
+    # Serve static files (JS, CSS, images)
     app.mount("/static", StaticFiles(directory=os.path.join(FRONTEND_BUILD_DIR, "static")), name="static")
 
-    # Catch-all route: serve React index.html
+    # SPA fallback: serve index.html for all non-API routes
     @app.get("/{full_path:path}")
     async def serve_react_app(full_path: str):
-        """
-        Serve React index.html for all non-API routes (SPA fallback).
-        """
+        if full_path.startswith("api/"):  # don’t override API routes
+            return {"error": "API route not found"}
         index_path = os.path.join(FRONTEND_BUILD_DIR, "index.html")
         if os.path.exists(index_path):
             return FileResponse(index_path)
