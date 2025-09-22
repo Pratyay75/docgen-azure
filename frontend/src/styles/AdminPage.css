@@ -1,0 +1,103 @@
+/* src/styles/AdminPage.css */
+.admin-page-root {
+  display: flex;
+  min-height: calc(100vh - 64px);
+  background: #f7f8fc;
+  padding: 20px;
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 200px;
+  background: #1a1a2e;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+.sidebar-item {
+  padding: 12px 20px;
+  color: #bbb;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+.sidebar-item:hover {
+  background: rgba(108, 99, 255, 0.15);
+  color: #fff;
+}
+.sidebar-item.active {
+  background: linear-gradient(90deg, #6c63ff, #9333ea);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Titles */
+.admin-title {
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* Table Container */
+.table-container {
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Table */
+.admin-table {
+  width: 100%;
+  border-collapse: separate !important;
+  border-spacing: 0 10px;
+}
+.admin-table th {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  background: #f3f4f6;
+  border: none;
+}
+.admin-table td {
+  font-size: 14px;
+  background: #fff;
+  border: none;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Add Row Inputs */
+.add-row td {
+  background: #f9fafb;
+}
+
+/* Inputs inside table */
+.admin-table .MuiTextField-root {
+  width: 100%;
+  background: #fff;
+  border-radius: 6px;
+}
+
+/* Buttons */
+.admin-page-root .MuiButton-root {
+  text-transform: none;
+  font-weight: 600;
+  border-radius: 8px;
+}
+.admin-page-root .MuiButton-contained {
+  background: #6c63ff;
+  color: #fff;
+}
+.admin-page-root .MuiButton-contained:hover {
+  background: #9333ea;
+}
+
+/* ✅ Fix: Align action buttons horizontally */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}

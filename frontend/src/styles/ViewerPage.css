@@ -1,0 +1,172 @@
+/* ViewerPage.css - light theme with fixed toolbar and scrollable content */
+
+/* root colors */
+:root {
+  --viewer-bg: #f7f7f9;
+  --toolbar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --prompt-bg: #ffffff;
+  --text-color-dark: #222222;
+  --accent-color: #4a148c;
+  --btn-blue: #1976d2;
+  --border-light: rgba(0,0,0,0.1);
+}
+
+/* page root */
+.viewer-root.cfg-page-root {
+  min-height: calc(100vh - 72px);
+  background: var(--viewer-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px; /* leave space for fixed toolbar */
+}
+
+/* toolbar - fixed */
+.viewer-root .cfg-toolbar.fixed-toolbar {
+  position: fixed;
+  top: 72px; /* below Navbar */
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* toolbar groups */
+.viewer-root .toolbar-left,
+.viewer-root .toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* search box */
+.viewer-root .search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  padding: 4px 8px;
+  background: #fafafa;
+  border: 1px solid var(--border-light);
+}
+.viewer-root .search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 4px;
+  min-width: 160px;
+  font-size: 14px;
+  color: var(--text-color-dark);
+}
+
+/* scrollable area */
+.viewer-root .viewer-scroll {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* each section card */
+.viewer-root .viewer-page {
+  background: var(--card-bg);
+  margin: 18px auto;
+  padding: 18px;
+  border-radius: 12px;
+  color: var(--text-color-dark);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border: 1px solid var(--border-light);
+  width: 100%;
+}
+
+/* section header */
+.viewer-root .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.viewer-root .page-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--accent-color);
+}
+
+/* editable content */
+.viewer-root .page-content {
+  margin-top: 12px;
+  padding: 12px;
+  min-height: 120px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 15px;
+  color: var(--text-color-dark);
+}
+
+/* bottom prompt area */
+.viewer-root .viewer-bottom {
+  margin-top: 16px;
+  background: var(--prompt-bg);
+  border-top: 1px solid var(--border-light);
+  padding: 16px;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+}
+
+/* responsive */
+@media (max-width: 920px) {
+  .viewer-root .viewer-scroll {
+    padding: 12px;
+  }
+  .viewer-root .viewer-page {
+    padding: 14px;
+  }
+  .viewer-root .toolbar-left,
+  .viewer-root .toolbar-right {
+    flex-wrap: wrap;
+  }
+  .viewer-root .search-box {
+    width: 100%;
+  }
+}
+/* push content below navbar + toolbar */
+.viewer-root.cfg-page-root {
+  min-height: calc(100vh - 72px);
+  background: var(--viewer-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 180px; /* space for Navbar (72px) + Toolbar (~100px) */
+}
+
+/* toolbar - fixed below Navbar */
+.viewer-root .cfg-toolbar.fixed-toolbar {
+  position: fixed;
+  top: 72px; /* right below Navbar */
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}

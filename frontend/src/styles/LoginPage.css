@@ -1,0 +1,202 @@
+/* Page root: two-column layout */
+.login-page-root {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: center;
+  padding: 60px;
+  gap: 40px;
+  /* deep purple gradient background */
+  background: radial-gradient(1200px 600px at 10% 20%, rgba(123, 80, 255, 0.18), transparent 10%),
+              linear-gradient(120deg, #0b0717 0%, #0e0b1b 30%, #1b1430 100%),
+              linear-gradient(90deg, #1f0d3a 0%, #201033 100%);
+  color: #e9e9f2;
+  box-sizing: border-box;
+}
+
+/* left hero area */
+.hero-column {
+  padding: 40px;
+  max-width: 760px;
+  position: relative;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.06);
+  color: #bfbfff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.3);
+  backdrop-filter: blur(4px);
+}
+
+.hero-title {
+  font-size: 56px;
+  line-height: 1.02;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 12px 0 12px;
+  letter-spacing: -0.5px;
+}
+
+.hero-sub {
+  color: rgba(255,255,255,0.8);
+  font-size: 16px;
+  margin-bottom: 22px;
+  max-width: 560px;
+}
+
+/* features list */
+.hero-features {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 24px;
+}
+
+.hero-features li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.9);
+  font-size: 15px;
+}
+
+/* custom check mark style */
+.hero-features li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(90deg,#6ee7ff22,#a78bfa22);
+  color: #9be7ff;
+  font-size: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2), inset 0 -6px 14px rgba(255,255,255,0.03);
+}
+
+/* take tour */
+.take-tour {
+  display: inline-block;
+  margin-top: 10px;
+  color: #cfd9ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* right column: form */
+.form-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* glass card */
+.login-box.glass {
+  width: 100%;
+  max-width: 420px;
+  padding: 34px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow:
+    0 10px 30px rgba(2,6,23,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+}
+
+/* centered title in the card */
+.login-title {
+  text-align: center;
+  margin-bottom: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+/* MUI input tweaks */
+.input-field .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(255,255,255,0.12);
+}
+.input-field .MuiInputBase-input {
+  color: #ffffff;
+}
+.MuiFormLabel-root {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* gradient button matching hero */
+.login-btn {
+  margin-top: 14px;
+  background: linear-gradient(90deg, #667eea 0%, #b76bdc 100%) !important;
+  color: white !important;
+  text-transform: none !important;
+  font-weight: 600;
+  padding: 12px 18px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(103, 65, 255, 0.18);
+}
+
+/* small "or sign in with" row */
+.or-signin {
+  text-align: center;
+  margin: 12px 0 8px;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+}
+
+/* Google button style */
+.google-btn {
+  border-radius: 8px;
+  text-transform: none;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #fff !important;
+  background: rgba(255,255,255,0.02);
+  box-shadow: none;
+}
+.google-icon {
+  display: inline-block;
+  margin-right: 8px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* signup link */
+.signup-link {
+  margin-top: 8px !important;
+  color: #d7d7ff !important;
+  text-transform: none !important;
+  font-weight: 600 !important;
+}
+
+/* responsive */
+@media (max-width: 980px) {
+  .login-page-root {
+    grid-template-columns: 1fr;
+    padding: 28px;
+  }
+  .hero-column {
+    order: 2;
+    padding-top: 12px;
+  }
+  .form-column {
+    order: 1;
+    margin-bottom: 18px;
+  }
+  .hero-title { font-size: 36px; }
+}
