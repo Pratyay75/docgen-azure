@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+          cache: 'pip'
 
       - name: Install backend dependencies
         run: |
@@ -38,6 +39,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Install frontend dependencies and build
         run: |
@@ -61,7 +63,7 @@ jobs:
         with:
           name: fullstack-app
           path: |
-            backend
+            backend/**
             !backend/venv/
             !backend/__pycache__/
 
@@ -76,6 +78,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: fullstack-app
+          path: ./backend
 
       # --------------------
       # Deploy to Azure Web App using Publish Profile
