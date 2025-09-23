@@ -16,9 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # --------------------
-      # Backend Setup
-      # --------------------
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -44,12 +41,12 @@ jobs:
           npm run build
 
       # --------------------
-      # Copy frontend build into backend
+      # Copy frontend build into backend/frontend
       # --------------------
       - name: Copy frontend build to backend
         run: |
-          mkdir -p backend/app/frontend/build
-          cp -r frontend/build/* backend/app/frontend/build/
+          mkdir -p backend/frontend/build
+          cp -r frontend/build/* backend/frontend/build/
 
       # --------------------
       # Upload artifact for deploy
@@ -86,8 +83,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'DocuGen' # 🔥 replace if needed
+          app-name: 'DocuGen'
           slot-name: 'Production'
           package: ./backend
           startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend.app.main:app'
-
