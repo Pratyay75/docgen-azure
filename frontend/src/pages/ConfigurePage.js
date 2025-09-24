@@ -189,9 +189,8 @@ export default function ConfigurePage() {
         })),
       };
 
-      const res = await api.post("/api/config", payload, {
-   headers: { Authorization: `Bearer ${token}` },
- });
+      const res = await api.put("/api/config", payload);
+
 
       if (res.data) {
         const pagesData = (res.data.pages || []).map((p) => ({
