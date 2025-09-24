@@ -82,14 +82,14 @@ jobs:
           path: ./backend
 
       # --------------------
-      # Login to Azure with Service Principal
+      # Login to Azure with provided credentials
       # --------------------
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_04A097AAAE304877AA029DEC3DE01414 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9D87A62D94F34B4D9A65212431129E16 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_750218E262FB47CDA4726A334F594310 }}
 
       # --------------------
       # Deploy to Azure Web App
@@ -97,6 +97,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'DocuGen'  # must match your Azure Web App Service name
+          app-name: 'DocuGen'  # must match your Azure Web App name
           package: ./backend
           startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
