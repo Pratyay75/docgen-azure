@@ -100,3 +100,4 @@ jobs:
           app-name: 'DocuGen'
           package: ./backend
           startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
+
