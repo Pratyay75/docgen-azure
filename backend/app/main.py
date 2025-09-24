@@ -59,10 +59,9 @@ app.include_router(companies_router, prefix="/api/companies", tags=["companies"]
 app.include_router(admin_router, prefix="/api/admin", tags=["admin"])
 app.include_router(config_router, prefix="/api/config", tags=["config"])
 
-# ---------------------------
-# Serve React frontend (built files)
-# ---------------------------
-FRONTEND_BUILD_DIR = os.path.join(os.path.dirname(__file__), "frontend/build")
+# Correct path: go up one level from app/ into backend/, then into frontend/build
+FRONTEND_BUILD_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "build")
+
 
 if os.path.exists(FRONTEND_BUILD_DIR):
     logger.info(f"✅ Serving React frontend from {FRONTEND_BUILD_DIR}")
