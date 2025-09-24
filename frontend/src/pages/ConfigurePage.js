@@ -27,9 +27,9 @@ export default function ConfigurePage() {
     const fetchConfig = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await api.get("/api/config", {
-   headers: { Authorization: `Bearer ${token}` },
- });
+        const res = await api.get("/api/config/", {
+  headers: { Authorization: `Bearer ${token}` },
+});
 
         if (res.data) {
           setDocumentName(res.data.document_name || "");
@@ -189,7 +189,8 @@ export default function ConfigurePage() {
         })),
       };
 
-      const res = await api.put("/api/config", payload);
+      const res = await api.post("/api/config/", payload);
+
 
 
       if (res.data) {
