@@ -97,6 +97,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'DocuGen'  # must match your Azure Web App name
+          app-name: 'DocuGen'
           package: ./backend
-          startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app'
+          startup-command: 'gunicorn -w 4 -k uvicorn.workers.UvicornWorker backend.app.main:app'
